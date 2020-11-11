@@ -26,6 +26,7 @@
 		out.println("history.back()");
 		out.println("</script>");
 	} else  {
+		session.setAttribute("userId", user.getUserId()); 	//세션 아이디 저장
 		out.println("<script>");
 		out.println("location.href='main.jsp'");
 		out.println("</script>");
