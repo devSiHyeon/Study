@@ -14,7 +14,7 @@
   </head>
   <body>
 	<script>
-		location.href="login.jsp";
+		location.href="main.jsp";
 	</script>
 
 	 <!--     Option 2: jQuery, Popper.js, and Bootstrap JS -->

@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String id = (String)session.getAttribute("userId");
+	if(id !=null) {
+		response.sendRedirect("main.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -37,10 +43,10 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false">접속하기</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item active" href="login.jsp">
-						로그인<span class="sr-only">(current)</span>
+						<a class="dropdown-item active" href="login.jsp" id="loginBtn">
+							로그인<span class="sr-only">(current)</span>
 						</a>
-					<div class="dropdown-drivider"></div>
+						<div class="dropdown-drivider"></div>
 						<a class="dropdown-item" href="join.jsp">회원가입</a>
 					</div>
 				</li>
