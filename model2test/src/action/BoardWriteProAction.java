@@ -48,7 +48,6 @@ public class BoardWriteProAction implements Action {
 			forward.setRedirect(true);
 			forward.setPath("boardList.do");
 		}
-		close(con);
 		return forward;
 		
 	}

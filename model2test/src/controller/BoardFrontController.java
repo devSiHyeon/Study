@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.BoardDetailAction;
 import action.BoardListAction;
+import action.BoardModifyFormAction;
+import action.BoardModifyProAction;
 import action.BoardReplyFormAction;
 import action.BoardReplyProAction;
 import action.BoardWriteProAction;
@@ -73,6 +75,22 @@ public class BoardFrontController extends HttpServlet {
 			}
 		} else if(command.equals("/boardReplyPro.do")) {
 			action = new BoardReplyProAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if(command.equals("/boardModifyForm.do")) {
+			action = new BoardModifyFormAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}	
+			
+		} else if(command.equals("/boardModifyPro.do")) {
+			action = new BoardModifyProAction();
 			try {
 				forward=action.execute(request, response);
 			}catch(Exception e) {

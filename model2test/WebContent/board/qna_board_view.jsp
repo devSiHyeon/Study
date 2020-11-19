@@ -57,8 +57,7 @@
 	<section id="commandList">
 		<a href="boardReplyForm.do?board_num=<%=article.getBoard_num() %>&page=<%=nowPage %>">[답변]</a>
 		<a href="boardModifyForm.do?board_num=<%=article.getBoard_num() %>&page=<%=nowPage %>">[수정]</a>
-		<a href="boardDeleteForm.do?board_num=<%=article.getBoard_num() %>&page=<%=nowPage %>">[삭제
-		]</a>
+		<a href="boardDeleteForm.do?board_num=<%=article.getBoard_num() %>&page=<%=nowPage %>">[삭제]</a>
 		<a href="boardList.do?page=<%=nowPage %>">[목록]</a>
 		&nbsp;&nbsp;
 	</section>
