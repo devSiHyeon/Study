@@ -13,6 +13,7 @@ import action.Action;
 import action.BoardDetailAction;
 import action.BoardListAction;
 import action.BoardReplyFormAction;
+import action.BoardReplyProAction;
 import action.BoardWriteProAction;
 import vo.ActionForward;
 
@@ -70,7 +71,13 @@ public class BoardFrontController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-			System.out.println(forward.getPath());
+		} else if(command.equals("/boardReplyPro.do")) {
+			action = new BoardReplyProAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		if (forward != null) {

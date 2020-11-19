@@ -22,7 +22,7 @@ public class BoardWriteProService {
 		} else {
 			rollback(con);
 		}
-		close(con);
+		if(con !=null) close(con);
 		return isWriteSuccess;
 	}
 

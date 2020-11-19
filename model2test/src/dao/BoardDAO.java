@@ -178,4 +178,53 @@ public class BoardDAO {
 		}
 		return updateCount;
 	}
+	public int insertReplyArticle(BoardBean article) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String board_max_sql="select max(board_num) from board";
+		String sql="";
+		int num=0;
+		int insertCount = 0;
+		int re_ref=article.getBoard_re_ref();
+		int re_lev=article.getBoard_re_lev();
+		int re_seq=article.getBoard_re_seq();
+		
+		try {
+			pstmt=con.prepareStatement(board_max_sql);
+			rs = pstmt.executeQuery();
+			if(rs.next())num = rs.getInt(1)+1;
+			else num =1;
+			sql="update board set board_re_seq=board_re_seq+1 where board_re_ref=? and board_re_seq>?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, re_ref);
+			pstmt.setInt(2, re_seq);
+			int updateCount=pstmt.executeUpdate();
+			
+			if(updateCount>0) {
+				commit(con);
+			}
+			re_seq=re_seq +1;
+			re_lev = re_lev+1;
+			sql="insert into board values(?,?,?,?,?,?,?,?,?,?,now())";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setString(2,article.getBoard_name());
+			pstmt.setString(3,article.getBoard_pass());
+			pstmt.setString(4,article.getBoard_subject());
+			pstmt.setString(5,article.getBoard_content());
+			pstmt.setString(6,"");  //답장에는 파일을 업로드하지 않음
+			pstmt.setInt(7,  re_ref);
+			pstmt.setInt(8, re_lev);
+			pstmt.setInt(9, re_seq);
+			pstmt.setInt(10, 0);
+			insertCount = pstmt.executeUpdate();
+		}catch(Exception ex) {
+			System.out.println("boardReply 에러 : " +ex);
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return insertCount;
+	}
 }
