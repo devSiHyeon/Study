@@ -84,3 +84,17 @@ return str_replace("=", "", base64_encode(openssl_encrypt($str, "AES-256-CBC", $
 <!-- 아이디 or 비밀번호 무언가 일치 확인할 때 -->
 if ($row['password'] == $password) {
 }
+
+ <!-- 검색 기능 구현 -->
+    if ($_GET['keyword']) {
+
+        // 검색용 쿼리 생성
+        $where = " AND ( {$_GET['key']} LIKE '%{$_GET['keyword']}%' ) ";
+    } else {
+        $where = "";
+    }
+
+<!-- 총 개수 구하기 -->
+    SELECT COUNT(*) AS cnt
+                        FROM tb_board
+                        WHERE
