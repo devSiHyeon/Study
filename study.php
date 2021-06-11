@@ -1,12 +1,45 @@
-<!-- 세션 & 쿠키 -->
-    쿠키는 보안이 취약함 (로컬 - 본인 컴퓨터) 
-        ex) 팝업창
-    세션은 쿠키를 기반으로 보안됨 (서버)
-        ex) 로그인
+<!-- 값 넘기는 방법 -->
+    <!-- form 이용 -->
+        method : get / post 두 가지의 방법이 있음
 
-    <!-- 세션 사용 시작 -->
-        <? session_start(); // 세션 사용 시작 ?>
-        항상 최상단에 위치할 것
+    <!-- 쿼리스트링 -->
+        주소 : url ? 지정이름 = 값 & 지정이름 = 값 
+        형식에 맞는 글을 주소창에 작성 시 받아오는 방법
+        <?
+            // 변수
+            $titlte = Util::sanitize($_REQUEST['titlte']);      // 값 받아오기
+            $opt = Util::sanitize($_REQUEST['opt']);
+
+            $opt_array = explode('|', $opt);                    // 여러개의 항목들을 '|' 기호 사용하여 구분하기 
+            // print_r($opt_array);
+
+            if ($titlte && $opt) {
+        ?>
+
+            <select>
+                <option><?=$titlte?></option>
+
+                <? foreach ($opt_array as $key => $value) { ?>          <!-- foreach를 사용하여 항목 개수 나열 -->
+                    <option><?=$value?></option>
+
+                <? } ?>
+
+            </select>
+
+            <button>전송하기</button>
+
+        <? } ?>
+
+
+    <!-- 세션 & 쿠키 -->
+        쿠키는 보안이 취약함 (로컬 - 본인 컴퓨터) 
+            ex) 팝업창
+        세션은 쿠키를 기반으로 보안됨 (서버)
+            ex) 로그인
+
+        <!-- 세션 사용 시작 -->
+            <? session_start(); // 세션 사용 시작 ?>
+            항상 최상단에 위치할 것
 
 <!-- 전체 -->
     <pre>
@@ -25,78 +58,6 @@
 
         <!-- js -->
         console.log($__);
-
-<!-- js -->
-    <!-- 정적  -->
-        ex) 리스트 불러오기 전 선택삭제 or 등록 버튼처럼 고정으로 되어있는 부분
-        $("#form_main").on("submit", function()) {
-        }
-
-    <!-- 동적  -->
-        ex) 리스트를 불러와서 수정 or 삭제
-        $(document).on("click", ".btn_update", function()) {
-        }
-
-    <!-- 버튼 클릭했을 때 -->
-        $("#btn_create").on("click", function() {
-        });
-
-    <!-- select 항목 변경 했을 때 (값이 변경 되었을 때)-->
-        $("#modal_product").on("change", function() {
-
-        }
-        select option 선택값 가져오기
-        .trigger("change"); 강제 실행 시키는 방법 (trigger)
-        
-    <!-- 정보 저장할 때 -->
-        $("#form_modal").on("submit", function() {
-        });
-
-    <!-- ajax 사용하여 줄나눔할 때 `` 변경 -->
-    <script>
-        var html = `
-                    <button type='button' class='btn btn-default btn-xs btn_delete' data-idx='${data}'>삭제</button>
-                    <button type='button' class='btn btn-default btn-xs btn_up' data-sort='${row.sort}'>▲</button>
-        `;
-        return html;
-    </script>
-    <!-- CallBack 콜백함수란 -->
-    콜백 함수는 코드를 통해 명시적으로 호출하는 함수가 아니라, 개발자는 단지 함수를 동록하기만 하고,
-    어떤 이벤트가 발생했거나 특정 시점에 도달했을 때 시스템에서 호출하는 함수를 말한다.
-
-    <!-- 달력 (datepicker) -->
-    코드 확인 필요없음 (date("Y-m-d"))
-        <script>
-            $("#modal_order_date").val(data.order_date);        // 달력에서는 이런식으로 데이터 넣으면 안된다고 했죠
-            $('.datepicker').datepicker('setDate', '< ?=val(data.order_date)?>'); //  이 코드는 왕창 틀림, data.order_date는 자바스크립트 변수인데, <? ?> php 에서 쓸려고 하면 안되죠
-            $('.datepicker').datepicker('setDate', 'val(data.order_date)'); // val() 이란 건 비슷한 건 있지만, 이렇게 쓰는 문법은 없죠
-            $('.datepicker').datepicker('setDate', 'data.order_date'); //  홑따옴표 안에 변수가 들어가면, 더이상 변수가 아니라, 문자열이 되죠. 다시말해 그냥 순수한 그대로의 글자로 출력
-            $('.datepicker').datepicker('setDate', data.order_date); // <-- 정답 (데이터 값이 있을 때)
-
-            $('.datepicker').datepicker('setDate', '<?=date("Y-m-d")?>');           // 당일날짜
-            $('.datepicker').datepicker('setDate', '<?=date("Y-m-d", strtotime("+1 days"))?>'); // (내일 날짜)
-
-            // function 사용하기 
-            $(document).ready(function(){
-                $('.datepicker').datepicker().datepicker('setDate', 'today');
-                
-            });
-        </script>
-        
-
-    코드 확인 필요 (날짜에 제대로 적용이 되었는지)
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = now.getMonth()+1;
-        var date = now.getDate()+1;
-        var tomorrow = year + "-" + ("00"+month).slice(-2) + "-" +("00"+date).slice(-2);
-
-<!-- ajax -->
-    spa 기반 : 이벤트가 일어나면 데이터를 받아서 틀에 담는 것 - 페이지가 변하지 않음
-        ex) 실시간 채팅, 바로 목차 보는 것
-    
-    그리드 툴 : 부트스트랩처럼 연결해서 사용 
-        ex) ajax를 이용하여 게시판 같은 데이터베이스 연결
 
 <!-- 반복문 -->
     for (횟수) / while (무한)   
@@ -162,6 +123,23 @@
         $("#btn-print").on("click", function() {       // id는 버튼에 적용한 이름
             $(".buttons-print").trigger("click");      // class는 DataTable에서 제공하는 이름
         });
+        
+        // 검색기능
+            '<input id="srch_date">'    // input을 사용할 경우 
+                    var table = $('#dataTables_1').DataTable();     // 데이터 목록에 보여지는 id 값 (table id)
+
+                    $("#srch_date").on("change", function() {       // input의 id값 이 변경 되었을 때 이벤트 발생
+                        table.search(this.value).draw();            // table의 동일한 값을 검색해라.
+                    });
+
+            /* <select id="srch_status">  // select를 사용할 경우 
+                <option value="생산중">생산중</option>          // 주의! option value에 테이블에 나오는 글자 그대로 작성할 것 (숫자, 한글, 영어)                
+            </select> */
+
+                    $("#srch_date").on("change", function() {       // input의 id값 이 변경 되었을 때 이벤트 발생
+                        table.search(this.value).draw();            // table의 동일한 값을 검색해라.
+                    });
+
 
     </script>
 
@@ -226,3 +204,9 @@
         php, html : class="number_format" 작성시 화면에서 오른쪽 정렬과 콤마가 나타남
         db에는 int로 작성 (보여지는 화면에서 콤마를 작성했을 시 DB에 콤마 이후의 숫자가 사라짐)
 
+    <!-- 날짜 시간 표시 -->
+        <?=date("H:")?>
+        <?="현재 날짜 : ". date("Y-m-d")?>      
+        <?="현재 시간 : ". date("H:i:s")?>      
+        <?="현재 일시 : ". date("Y-m-d H:i:s")?>
+        ex) <?=date("H:00")?>기준  -> 11:00 기준 (분은 00으로 고정)
