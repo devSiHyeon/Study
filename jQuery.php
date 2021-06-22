@@ -7,6 +7,96 @@
         }
     </style>
 
+
+<!-- 메뉴 슬라이드 -->
+
+<script>
+        $(function() {
+  
+            $(".slide > li").mouseover(function() {
+                $(this).children(".hide").stop().slideDown(); 
+                }); 
+
+            $(".slide>li").mouseleave(function() {
+            $(this).children(".hide").stop().slideUp();
+                }); 
+
+        });
+    </script>
+
+    <style>
+        .slide .hide {
+            display:none;
+            }
+
+        .slide > li { 
+            width: 200px; 
+            list-style: none; 
+            text-align:center; 
+        }
+        
+        .slide { 
+            cursor: pointer; 
+            }
+        
+        .slide > li a:hover { 
+            background: #009688; 
+            color: #fff; 
+        }
+        .slide > li { 
+            position: relative; 
+            float: left;
+            width: 150px; 
+            height: 30px; 
+            /* background-color:#e5e5e5; */
+        
+        }
+        
+        li { 
+            list-style: none; 
+        }
+
+        .slide { display: flex; }
+
+    </style>
+
+    <nav>
+        <div class="Menu">
+            <ul class="slide">
+                <li>
+                    <span>병원소개</span>
+                    <ul class="hide">
+                        <li>인사말</li>
+                        <li>의료진소개</li>
+                        <li>장비소개</li>
+                        <li>둘러보기</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <span>척추센터</span>
+                    <ul class="hide">
+                        <li>목질환</li>
+                        <li>허리질환</li>
+                        <li>가슴질환</li>
+                        <li>골반질환</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <span>관절센터</span>
+                    <ul class="hide">
+                        <li>무릎질환</li>
+                        <li>어깨질환</li>
+                        <li>상지질환</li>
+                        <li>하지질환</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br><br>
+
 <!-- append, find, siblings -->
     <script>
 
@@ -221,7 +311,7 @@
     </script>
     <h2>▶ animate</h2>
     <div>
-        <button id="btnStart">시작</button>
+        <button id="btnStart" onclick="viewMsg()">시작</button>
         <button id="btnStop">중지</button>
         <button id="btnEnd">초기화</button>
     </div>
@@ -230,32 +320,3 @@
     </div>
     <p id="text"></p>
 
-
-<!-- on, off 기능 -->   
-<!-- btn on으로 클릭했지만 첫 번째 이벤트 적용 x -->
-<!-- http://www.devkuma.com/codes/167 -->
-<script>
-    $(function() {
-      $("#btn").on("click", function() {
-        alert("버튼을 클릭했습니다.");
-      });
-      $("#btnBind").on("click", function() {
-        $("#btn").on("click").text("버튼 클릭 가능");
-      });
-      $("#btnUnbind").on("click", function() {
-        $("#btn").off("click").text("버튼 클릭 불가능");
-      });
-    });
-  </script>
-  <button id="btn">버튼 클릭 가능</button>
-  <button id="btnBind">버튼 클릭을 가능하게 합니다.</button>
-  <button id="btnUnbind">버튼 클릭을 불가능하게 합니다.</button>
-
-  <br><br><br>
-
-<!-- contents를 사용하여 적용하기 -->  
-<!-- css 적용되는 부분이 어디인가?-->
-    <iframe src="https://api.jquery.com/" width="50%" height="300" id="frameDemo"></iframe>
-    <script>
-    $( "#frameDemo" ).contents().find( "a" ).css( "background-color", "red" );
-    </script>
