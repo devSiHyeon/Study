@@ -9,92 +9,96 @@
 
 
 <!-- 메뉴 슬라이드 -->
-
-<script>
+    <!-- > 는 바로 아래라는 뜻 -->
+    <script>
         $(function() {
-  
-            $(".slide > li").mouseover(function() {
-                $(this).children(".hide").stop().slideDown(); 
-                }); 
 
-            $(".slide>li").mouseleave(function() {
-            $(this).children(".hide").stop().slideUp();
-                }); 
+            // > 는 바로 아래라는 뜻
+            // .slide > span 은, .slide 바로 아래 span 이라는 뜻이니까 못 찾음
+            // .slide > li > span       OR      .slide span 
+
+            $(".slide > li > span").on("mouseover", function() {
+            var submenu = $(this).next("ul");
+                submenu.slideDown();
+            });
+
+            $(".slide > li").on("mouseleave", function() { // 서브 메뉴를 둘러싸고 있는 li 를 벗어나면 감춰지게
+            var submenu = $(this).find("ul"); // li 밑에 있는 ul 찾기   
+                submenu.slideUp();
+            });  
 
         });
+
     </script>
 
     <style>
+        .Menu{
+            width:500px;
+        }
         .slide .hide {
-            display:none;
+            display:none; 
+            position:absolute;
             }
 
-        .slide > li { 
-            width: 200px; 
-            list-style: none; 
-            text-align:center; 
+        .slide { 
+            display: flex; 
+            position:relative;
         }
-        
+
+        .slide > li { 
+                width: 200px; 
+                list-style: none; 
+                text-align:center; 
+                background:#e5e5e5;
+        }
+
         .slide { 
             cursor: pointer; 
-            }
-        
-        .slide > li a:hover { 
-            background: #009688; 
-            color: #fff; 
-        }
-        .slide > li { 
-            position: relative; 
-            float: left;
-            width: 150px; 
-            height: 30px; 
-            /* background-color:#e5e5e5; */
-        
-        }
-        
-        li { 
-            list-style: none; 
         }
 
-        .slide { display: flex; }
-
+        .hide > li {
+            width:150px;
+            height:30px;
+            list-style: none;
+            text-align: center;
+            background-color: #eefcd4;
+        }
     </style>
 
-    <nav>
-        <div class="Menu">
-            <ul class="slide">
-                <li>
-                    <span>병원소개</span>
-                    <ul class="hide">
-                        <li>인사말</li>
-                        <li>의료진소개</li>
-                        <li>장비소개</li>
-                        <li>둘러보기</li>
-                    </ul>
-                </li>
+    <div class="Menu">
+        <ul class="slide">
+            <li>
+                <span>병원소개</span>
+                <ul class="hide">
+                    <li>인사말</li>
+                    <li>의료진소개</li>
+                    <li>장비소개</li>
+                    <li>둘러보기</li>
+                </ul>
+            </li>
 
-                <li>
-                    <span>척추센터</span>
-                    <ul class="hide">
-                        <li>목질환</li>
-                        <li>허리질환</li>
-                        <li>가슴질환</li>
-                        <li>골반질환</li>
-                    </ul>
-                </li>
+            <li>
+                <span>척추센터</span>
+                <ul class="hide">
+                    <li>목질환</li>
+                    <li>허리질환</li>
+                    <li>가슴질환</li>
+                    <li>골반질환</li>
+                </ul>
+            </li>
 
-                <li>
-                    <span>관절센터</span>
-                    <ul class="hide">
-                        <li>무릎질환</li>
-                        <li>어깨질환</li>
-                        <li>상지질환</li>
-                        <li>하지질환</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+            <li>
+                <span>관절센터</span>
+                <ul class="hide">
+                    <li>무릎질환</li>
+                    <li>어깨질환</li>
+                    <li>상지질환</li>
+                    <li>하지질환</li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
     <br><br>
 
 <!-- append, find, siblings -->
