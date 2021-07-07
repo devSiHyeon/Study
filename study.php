@@ -62,7 +62,6 @@
 <!-- 반복문 -->
     for (횟수) / while (무한)   
 
-
 <!-- 삼항연산자 -->
     조건 ? 참 : 거짓
     <?= ($row['is_secret'] == "Y") ? "checked" : "" ?>
@@ -92,13 +91,21 @@
         ]
     </script>
 
-
 <!-- 공지사항 제일 먼저 위로 -->
     sql문을 사용하여 오름차순, 내림차순 설정
     
     ORDER BY 
         is_notice ASC, 
         id DESC
+
+<!-- 인쇄 -->
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>   <!-- 연결 코드 -->
+
+    <script>
+    $(document).ready(function(){
+        window.print();
+    });
+    </script>
 
 <!-- DataTable -->
     <script>
@@ -172,7 +179,7 @@
     echo $c;
 
     <!-- 마지막 idx 불러오기 -->
-    lastInsertID(); // 방금 전 Insert 로 인해 만들어진 row 의 idx를 가져온다.
+    $lastIDX = $db->lastInsertID(); // 방금 전 Insert 로 인해 만들어진 row 의 idx를 가져온다.
 
     <!-- item을 이용하여 다른 테이블의 목록을 불러올 때 -->
     첫 번째 item은 데이터에 들어갈 내용 
@@ -206,7 +213,7 @@
 
     <!-- 날짜 시간 표시 -->
         <?=date("H:")?>
-        <?="현재 날짜 : ". date("Y-m-d")?>      
+        <?="현재 날짜 : ". date("Y-m-d")?>  y-m-d : 21-06-21 / Y-m-d : 2021-06-21      
         <?="현재 시간 : ". date("H:i:s")?>      
         <?="현재 일시 : ". date("Y-m-d H:i:s")?>
         ex) <?=date("H:00")?>기준  -> 11:00 기준 (분은 00으로 고정)
