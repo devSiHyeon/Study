@@ -1,0 +1,85 @@
+* {
+	margin:0px;
+	padding:0px;
+}
+
+html, body{	
+	height:100%;
+}
+
+.main {
+	height:100%;
+	width:flex;
+	min-width:1270px;	
+}
+
+/* 메인 왼쪽 */
+	.main_left {
+		width:85%;
+		height:100%;
+		float:left;
+		color:white;
+		background:url("../img/main.jpg");
+	    background-size : cover;					/* div 크기에 맞게 이미지 100% */
+	    /* opacity:0.9; */								/* 배경 흐리게 */
+	}
+	
+	.main_left_text{
+		font-size:25px;
+		margin:50px;
+	}
+	
+	.main_button{
+		width:80px;
+	}
+	
+	.left_font{
+		color:#b9ffff; 
+		font-size:40px; 
+		margin-bottom:10px;
+	}
+	.main_left_bottom {
+		position:absolute;
+		bottom:0;
+		width:85%;
+		height:30px;
+		background-color:#222222;
+		text-align:center;
+	}
+	
+/* 메인 오른쪽 */
+.main_right {
+	width:15%; 
+	height:100%;
+	float:left;
+	vertical-align: middle;
+	text-align:center;
+}
+
+.main_right_sub{
+	margin-top:80%;
+}
+	
+/* 모달창 */
+	.modal-body{
+		text-align:center;
+	}
+	input {
+		width:220px;
+		height:30px;
+	}
+	
+	::placeholder{
+		font-size:0.8em;
+		color:gray;
+	}
+		
+	label{
+		width:100px;
+		text-align:center;
+	}
+	
+	select{
+		width:220px;
+		height:28px;
+	}
