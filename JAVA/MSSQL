@@ -1,0 +1,51 @@
+package db;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DBUtil {
+	
+	@SuppressWarnings("unused")    // 경고무시를 의미함 (else 부분에 노란색 경고)
+  
+	public static void main(String[] args) {
+		
+    // 서버 정보
+      String url = "jdbc:sqlserver://DESKTOP-95G6JVJ:1433;databaseName=woojin;";  
+      String user = "sa";
+      String password = "js1234";
+		
+		ResultSet resultSet = null;
+		
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			
+			Connection conn =DriverManager.getConnection(url,user,password);
+			Statement statement = conn.createStatement();
+			
+			if(conn!=null) {
+			  System.out.println("DB 연결성공");
+				
+			//	DB 연결 확인 (데이터 여부 확인)
+					String selectSql = "SELECT * from member";
+					resultSet = statement.executeQuery(selectSql);
+					
+					while(resultSet.next()) {
+						System.out.println(resultSet.getString(2)); // 두 번째 컬럼의 데이터 표시
+					}
+          
+			} else {
+				System.out.println("DB 연결실패");
+			}
+			
+			conn.close();
+		}	catch(Exception e) {
+			e.printStackTrace();            // 에러의 발생근원지를 찾아서 단계별로 에러를 출력
+		} 
+
+	}
+	
+}
+
+	
