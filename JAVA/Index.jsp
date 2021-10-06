@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>회사</title>
-	<link href="./img/woojin.png" rel="icon" type="image/x-icon">
+	<link href="./img/Logo.png" rel="icon" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="./css/Index.css">
 	
 	<!-- Bootstrap CSS -->
@@ -25,7 +25,7 @@
 			<form method="post" action="./login.jsp">
 				<input type="text" name="user_id" placeholder="  User Id">
 				<input type="text" name="passwrod" placeholder="  Password"><br><br>
-				<button type="submit" class="main_button btn btn-primary" onclick="location.href='./Woo_Admin.jsp'">Login</button>
+				<button type="submit" class="main_button btn btn-primary" onclick="location.href='#'">Login</button>
 				<button type="button" data-toggle="modal" data-target="#JoinModal" class="main_button btn btn-success">Join</button>
 			</form>
 		</div>
