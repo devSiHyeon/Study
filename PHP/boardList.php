@@ -11,9 +11,10 @@
 
     // paging
         // total list 
-        $sql_total	 	= "SELECT * FROM member_detail";
+        $sql_total	 	= "SELECT COUNT(idx) FROM member_detail";
         $result_total	= mysqli_query ($db, $sql_total);
-        $row_total 	    = mysqli_num_rows($result_total);  // DB row
+        $row            = mysqli_fetch_array($result_total);
+        $row_total 	    = $row[0];  // DB row
         
         // now page        
         $page_list 	= 5;                            // 한 페이지에 몇 개의 row가 들어가는지
