@@ -50,9 +50,10 @@
     <?php    } ?>
     </table>
     <?php 
-        $block_start    = $paging[1];
-        $block_end      = $paging[2];
-        $page_total     = $paging[3];
+        // 함수 사용후 return 받은 값
+            $block_start    = $paging[1];
+            $block_end      = $paging[2];
+            $page_total     = $paging[3];
 
         // 처음
         if($page >= 1){
