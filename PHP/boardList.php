@@ -12,7 +12,7 @@
         */
 
         // 페이지 응용
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;      // 주소창에 문자, 소수점 작성 방지하기 위해 무조건 int 형으로 바꿔준다
+        $page = isset($_GET['page']) ? ( $_GET['page'] == 0 ? 1 : (int)$_GET['page']) : 1;      // 주소창에 문자, 소수점 작성 방지하기 위해 무조건 int 형으로 바꿔준다
 
         /* 
             if (isset ($_GET['page'])){ 
