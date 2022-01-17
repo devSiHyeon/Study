@@ -1,0 +1,25 @@
+<?php
+    include_once ("./DB.php");
+
+$idx        = $_POST['idx'];
+$pw         = $_POST['user_pw'];
+$user_name  = $_POST['user_name'];
+$user_phone = $_POST['user_phone'];
+
+// 회원정보 수정
+$sql        = "UPDATE member_detail SET user_name = '$user_name', user_phone = '$user_phone', updated_time = NOW() WHERE member_idx = $idx";
+$result     = mysqli_query($db, $sql);
+
+if($pw) { 
+    echo "비밀번호 있음";
+    // 비밀번호 수정
+    $user_pw    = password_hash($pw, PASSWORD_DEFAULT);
+    $sql_pw     = "UPDATE member SET user_pw = '$user_pw', updated_time = NOW() WHERE idx = $idx";
+    $result     = mysqli_query($db, $sql_pw);
+    
+} else {
+    echo "비밀번호 없음 ";
+}
+?>
+
+<a href="./board_list_3.php">목록 </a>
