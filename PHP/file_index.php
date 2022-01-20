@@ -5,8 +5,8 @@
     <title>게시판</title>
 </head> 
 <body> 
-<h3>게시판</h3>
-<h4>글쓰기</h4>
+<h2>게시판</h2>
+<h4>▶ 글쓰기</h4>
     <form action="./process_1.php" method="POST" enctype="multipart/form-data">
         작성자 : <input type="text" name="writer" required> <br>
         제 목 : <input type="text" name="title" required> <br>
@@ -17,8 +17,8 @@
         <input type="submit">
     </form>
 
-<h4>리스트</h4>
-    <table>
+<h4>▶ 리스트</h4>
+    <table border="1">
         <thead>
             <tr>
                 <td>번호</td>
@@ -45,5 +45,11 @@
         <?php } ?>
     </table>
 
+    <h4>▶ FTP file 삭제</h4>
+    <a href="./delete_ftp.php?delete=images";>jpg, jpeg 삭제</a> <br>
+    <a href="./delete_ftp.php?delete=png";>png 삭제</a> <br>
+    <a href="./delete_ftp.php?delete=gif";>gif 삭제</a> <br>
+    <a href="./delete_ftp.php?delete=text";>images 삭제</a> <br>
+    
 </body>
 </html>
