@@ -16,6 +16,7 @@ require_once ("./DB.php");
     $f2_type    = $_FILES['file_2']['type'];
     $f2_size    = $_FILES['file_2']['size'];
     $f2_t_name  = $_FILES['file_2']['tmp_name'];
+    //$f2_type  = pathinfo($_FILES['file_2']['name']);
 
     // 첨부파일 확인
     $type   = array ("image/jpg", "image/jpeg", "image/png", "image/gif", "text/plain");
@@ -23,8 +24,8 @@ require_once ("./DB.php");
     
     // 디렉토리 파일 경로
     $images_file    = "./images";
-    $png_file       = "./png";
     $gif_file       = "./gif";
+    $png_file       = "./png";
     $text_file      = "./text";
     
     // 첨부파일 1
@@ -76,7 +77,7 @@ require_once ("./DB.php");
     }
 
     // 첨부파일 2
-    if (isset($_FILES['file_1']) && strlen($f1_name) > 0){        
+    if (isset($_FILES['file_2']) && strlen($f2_name) > 0){        
         // 첨부파일2 경로
         if(in_array($f2_type, $type)){
             switch($f2_type){
@@ -96,7 +97,7 @@ require_once ("./DB.php");
                     $save_2 = '';
             }
         }
-          // directory insert
+        // directory insert
          
         if (!file_exists($save_2)) {
             //umask(0);                             // 권한 0으로 바꿔줌 (위험부담 있음)
@@ -147,9 +148,9 @@ require_once ("./DB.php");
     $sql_board  = "INSERT INTO board (`title`, `writer`, `content`, `upload_time`) VALUE ('$title', '$writer', '$content', NOW())";
     $result     = mysqli_query($db, $sql_board); 
     $last_idx   = mysqli_insert_id($db);
+    $ip         = $_SERVER["REMOTE_ADDR"];
 
     if (isset($_FILES['file_1']) && strlen($f1_name) > 0){
-        $ip         = $_SERVER["REMOTE_ADDR"];
 
         $sql_1      = "INSERT INTO board_file (`board_idx`, `file_name`, `tmp_name`, `save`, `type`, `ip_address`, `upload_time`) 
                     VALUES ('$last_idx', '$f1_name','$f1_t_name', '$save_1','$f1_type','$ip', NOW())";
