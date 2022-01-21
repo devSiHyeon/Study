@@ -12,10 +12,18 @@
     $directory   = "/home/se/public_html/board/$delete";
     $handle = opendir($directory);
 
+    $i = 0;
     while ($file = readdir($handle)) {
         if($file != ".." && $file != "."){
             unlink($directory.'/'.$file);
         }
+
+        $i++;
+
+        if ( $i > 1000 ) {
+            exit;
+        }
+
     }
     rmdir($directory);
 ?>
