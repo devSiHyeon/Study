@@ -49,7 +49,7 @@
     <a href="./delete_ftp.php?delete=images";>jpg, jpeg 삭제</a> <br>
     <a href="./delete_ftp.php?delete=png";>png 삭제</a> <br>
     <a href="./delete_ftp.php?delete=gif";>gif 삭제</a> <br>
-    <a href="./delete_ftp.php?delete=text";>images 삭제</a> <br>
+    <a href="./delete_ftp.php?delete=txt";>txt 삭제</a> <br>
     
 </body>
 </html>
