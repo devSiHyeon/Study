@@ -19,8 +19,9 @@ require_once ("./DB.php");
 
         $save_old_2 = '';
 
-        $db_file = $_POST['DB_file_1'];         // file_1이 DB에 저장 되어 있을 경우 : file_2에 파일 첨부해도 ok / file_1이 없을 경우 : file_1 부터 입력
-
+        if(isset($_FILES['file_1']) && strlen($f1_name) > 0){  
+            $db_file = $_POST['DB_file_1'];         // file_1이 DB에 저장 되어 있을 경우 : file_2에 파일 첨부해도 ok / file_1이 없을 경우 : file_1 부터 입력
+        }
     // DB에 저장된 file 이름 
         $sql    = "SELECT file_name, save FROM board AS a LEFT JOIN board_file AS b ON a.idx = b.board_idx WHERE a.idx = '$idx'";
         $result = mysqli_query($db, $sql);
