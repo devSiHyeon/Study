@@ -18,7 +18,9 @@ require_once ("./DB.php");
         $f2_type  = pathinfo($_FILES['file_2']['name'], PATHINFO_EXTENSION );
 
         $save_old_2 = '';
-    
+
+        $db_file = $_POST['DB_file_1'];         // file_1이 DB에 저장 되어 있을 경우 : file_2에 파일 첨부해도 ok / file_1이 없을 경우 : file_1 부터 입력
+
     // DB에 저장된 file 이름 
         $sql    = "SELECT file_name, save FROM board AS a LEFT JOIN board_file AS b ON a.idx = b.board_idx WHERE a.idx = '$idx'";
         $result = mysqli_query($db, $sql);
@@ -63,37 +65,39 @@ require_once ("./DB.php");
         $txt_file       = "./txt";
 
     // file 1 용량, 확장자 확인
-    if (isset($_FILES['file_1']) && strlen($f1_name) > 0){
-        if ($f1_size > $size) { 
-            echo "1. 용량 확인<button onclick='history.back()'>이전</button>";
-            return;
-        }
-        if (!in_array($f1_type, $type)){    
-            echo "1 jpg, png, gif, txt 확장자만 가능합니다.<button onclick='history.back()'>이전</button>";
-            return;
-        } 
-    }
-
-    // file 2 용량, 확장자 확인
-    if (isset($_FILES['file_2']) && strlen($f2_name) > 0){     
-        if(!isset($old_1)){
-            if (empty($f1_name)) {
-                echo "파일1부터 첨부하세요. <button onclick='history.back()'>이전</button>";
+        if (isset($_FILES['file_1']) && strlen($f1_name) > 0){
+            if ($f1_size > $size) { 
+                echo "1. 용량 확인<button onclick='history.back()'>이전</button>";
                 return;
             }
-        } else {
-            if (isset($_FILES['file_2'])) { 
-                if ($f2_size > $size) {     // 용량확인
-                    echo "2. 용량 확인<button onclick='history.back()'>이전</button>";
-                    return;
+            if (!in_array($f1_type, $type)){    
+                echo "1 jpg, png, gif, txt 확장자만 가능합니다.<button onclick='history.back()'>이전</button>";
+                return;
+            } 
+        }
+
+    // file 2 용량, 확장자 확인
+        if (isset($_FILES['file_2']) && strlen($f2_name) > 0){   
+            if(!isset($db_file)){
+                if(!isset($old_1)){
+                    if (empty($f1_name)) {
+                        echo "파일1부터 첨부하세요. <button onclick='history.back()'>이전</button>";
+                        return;
+                    }
                 }
-                if (!in_array($f2_type, $type)){    // 확장자 검사
-                    echo "2 jpg, png, gif, txt 확장자만 가능합니다.<button onclick='history.back()'>이전</button>";
-                    return;
+            } else {
+                if (isset($_FILES['file_2'])) { 
+                    if ($f2_size > $size) {     // 용량확인
+                        echo "2. 용량 확인<button onclick='history.back()'>이전</button>";
+                        return;
+                    }
+                    if (!in_array($f2_type, $type)){    // 확장자 검사
+                        echo "2 jpg, png, gif, txt 확장자만 가능합니다.<button onclick='history.back()'>이전</button>";
+                        return;
+                    }
                 }
-            }
-        }   
-    }
+            }   
+        }
 
     // file 1 directory $ file name
     if (isset($_FILES['file_1']) && strlen($f1_name) > 0){
@@ -193,7 +197,7 @@ require_once ("./DB.php");
         } else {
             $upload_1 = move_uploaded_file($f1_t_name,$save_1.'/'.$new_1);
             if($upload_1 == false){
-                echo "파일 업로드 실패";
+                echo "파일1 업로드 실패";
                 return;
             }
             $sql_1      = "INSERT INTO board_file (`board_idx`, `file_name`, `tmp_name`, `save`, `type`, `ip_address`, `upload_time`) 
@@ -210,7 +214,7 @@ require_once ("./DB.php");
             unlink($save_old_2 .'/'.$old_2);
             $upload_2 = move_uploaded_file($f2_t_name,$save_2.'/'.$new_2);
             if($upload_2 == false){
-                echo "파일 업로드 실패";
+                echo "파일2 업로드 실패";
                 return;
             }
             // file idx
@@ -225,7 +229,7 @@ require_once ("./DB.php");
         }else {
             $upload_2 = move_uploaded_file($f2_t_name,$save_2.'/'.$new_2);
             if($upload_2 == false){
-                echo "파일 업로드 실패";
+                echo "파일2 업로드 실패";
                 return;
             }
             $sql_2      = "INSERT INTO board_file (`board_idx`, `file_name`, `tmp_name`, `save`, `type`, `ip_address`, `upload_time`) VALUES ('$idx', '$f2_name','$f2_t_name', '$save_2','$f2_type','$ip', NOW())";
@@ -238,5 +242,5 @@ require_once ("./DB.php");
     $sql_board  = "UPDATE board SET title = '$title', content = '$content', upload_time = NOW() WHERE idx = '$idx'";
     $result     = mysqli_query($db, $sql_board);
     
-    echo "파일 업로드 및 수정 완료  <a href='./Index.php'> 리스트 </a>";
+    echo "파일 업로드 및 수정 완료  <a href='./'> 리스트 </a>";
 ?>
