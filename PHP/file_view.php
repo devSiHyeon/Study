@@ -32,7 +32,7 @@
     ?>
     
     <!-- 게시글 -->
-    <form action="update.php?idx=<?=$idx?>" method="POST" enctype="multipart/form-data">
+    <form name="asdf" action="update.php?idx=<?=$idx?>" method="POST" enctype="multipart/form-data">
         작성자 : <?=$arr[0]['writer'];?> <br>
         제목 : <input name="title" value="<?= $arr[0]['title'];?>"> <br>
         내용 : <textarea name="content"><?= $arr[0]['content'];?></textarea> <br>
@@ -41,9 +41,12 @@
         <?php 
             if(!empty($file1)) {                                    // DB file 있는가?
                 if (file_exists($path_1)){                          // ftp file 있는가?
-                    echo "<a href='./$save_1/$file1' name='file1' download>$file1</a>";
-                    echo "<input type='hidden' name='DB_file_1' value='$file1'>";
-              }
+        ?>
+
+                   <a href=<?='./$save_1/$file1'?> name='file1' download><?=$file1?></a>;
+                   <input type='hidden' name='DB_file_1' value='$file1'>;
+        <?php
+                }
             }
             if(isset($arr[0]) && strlen($arr[0]['file_name']) > 0){  
         ?>  
@@ -65,7 +68,5 @@
         <br>
         <input type="submit" value="수정" style="margin-left:200px; margin-top:20px;";>
     </form>
-
-
 </body>
 </html>
