@@ -1,0 +1,32 @@
+
+    // 파일 업로드 (배열)
+    $files = $_FILES['upload'];
+    
+    $mime = array('image/jpg','image/jpeg');
+    pre($files);
+
+    $insert = array();
+    foreach($files['error'] as $ikey => $item) {
+
+        if ($item == 0 && $files['size'][$ikey] > 0 && in_array($files['type'][$ikey], $mime)) {
+
+            $name = md5($f2_name . time() . uniqid() ).'.'. pathinfo($files['name'][$ikey], PATHINFO_EXTENSION);
+            if (true === move_uploaded_file($files['tmp_name'][$ikey], './images/'.$name)) {
+                $insert[] = array('orig' => $name, 'sysn' => $files['name'][$ikey]);
+            }
+
+        }
+
+    }
+
+    $sql ='insert into board () values ()';
+    
+    if (mysqli_query($db, $sql)) {
+        $last_id = mysqli_insert_id($db);
+
+
+        foreach ($insert as $values) {
+            $sql = 'insert into board_file () values ('.$last_id.', '.$values[orig].', '.$values[sysn].')';
+
+        }
+    }
