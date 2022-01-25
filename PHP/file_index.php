@@ -6,8 +6,8 @@
 </head> 
 <body> 
 <h2>게시판</h2>
-<h4>▶ 글쓰기</h4>
-    <form action="./process_1.php" method="POST" enctype="multipart/form-data">
+<h4>▶ 글쓰기_1</h4>
+    <form name="process" action="./process_1.php" method="POST" enctype="multipart/form-data">
         작성자 : <input type="text" name="writer" required> <br>
         제 목 : <input type="text" name="title" required> <br>
         내 용 : <textarea name="content" required></textarea> <br>
@@ -16,7 +16,17 @@
         <label style="color:#ff6f00; font-size:11px;">* 1MB 미만 파일만 업로드 가능합니다.</label><br>
         <input type="submit">
     </form>
-
+<h4>▶ 글쓰기_2 (배열)</h4>
+    <form name="create_process" action="./create_process.php" method="POST" enctype="multipart/form-data">
+        작성자 : <input type="text" name="writer" required> <br>
+        제 목 : <input type="text" name="title" required> <br>
+        내 용 : <textarea name="content" required></textarea> <br>
+        파 일 : <input type="file" name="upload[]" value=""> <br>
+        파 일 : <input type="file" name="upload[]" value=""> <br>
+        
+        <label style="color:#ff6f00; font-size:11px;"> * 1MB 미만 파일만 업로드 가능합니다.</label><br>
+        <input type="submit">
+    </form>
 <h4>▶ 리스트</h4>
     <table border="1">
         <thead>
@@ -37,7 +47,7 @@
         <tbody>
             <tr>
                 <td><?=$No++?></td>
-                <td><a href="./view.php?idx=<?=$row['idx'];?>"><?=$row['title'];?></a></td>
+                <td><a href="./view.php?idx=<?=$row['idx'];?>"><?= (mb_strlen($row['title']) > 8) ? mb_substr($row['title'],0,8)."..." : $row['title'];?></a></td>
                 <td><?=$row['writer'];?></td>
                 <td><a href="./delete.php?idx=<?=$row['idx']?>";>삭제</a></td>
             </tr>
