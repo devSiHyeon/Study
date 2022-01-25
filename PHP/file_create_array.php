@@ -69,10 +69,7 @@
             }   else    { echo "$file_name 업로드 실패 : 용량 확인 <br>"; }    // end size check
         }   
     }  // end file 
-    echo "sql";
+    echo "업로드 완료 <a href='./'>리스트</a>";
     
-exit;
-
-    echo 'saved <br>';
    
 ?>
