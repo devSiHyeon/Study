@@ -38,15 +38,14 @@
         if ($item == 0 &&  1048576 > $size && $size> 0 && in_array($extension, $mime)) {     // 파일 유무, 용량, 타입 확인
             $rand_name = md5($item['name'][$ikey] . time() . uniqid() ).'.'. $extension;    // directory에 저장할 랜덤 이름
             // 디렉토리 생성
-             if (!file_exists('/home/se/public_html/'.$save)) {
-                 mkdir($save, 0777, true);             
-             } 
+            if (!file_exists('./'.$save)) {
+                mkdir($save, 0777, true);             
+            } 
             // 파일 upload
-             if (true === move_uploaded_file($tmp_name,'./'.$save.'/'.$rand_name)) {
+            if (true === move_uploaded_file($tmp_name,'./'.$save.'/'.$rand_name)) {
                 $insert[] = array('rand' => $rand_name, 'sysn' => $name, 'tmp' => $tmp_name, 'save' => $save, 'extension' => $extension);
-                echo $tmp_name,'/home/se/public_html/'.$save.'/'.$rand_name;
             }
-        } 
+        }
 
     } // end file array
 
@@ -55,15 +54,15 @@
     // board insert true
     if (mysqli_query($db, $sql)) {
         $last_idx = mysqli_insert_id($db);
-        
-        if($insert){
+        // if(count($insert)> 0){
+        if(isset($insert)){             // $insert 유무 
             // board_file insert
             $ip         = $_SERVER["REMOTE_ADDR"];
             foreach ($insert as $values) {
                 //pre($insert);
                 $sql_file = 'INSERT INTO board_file (`board_idx`, `file_name`, `rand_name`, `tmp_name`, `save`, `type`, `ip_address`, `upload_time`) 
                     VALUES (\''.$last_idx.'\', \''.$values['sysn'].'\', \''.$values['rand'].'\', \''.$values['tmp'].'\', \'./'.$values['save'].'\',\''.$values['extension'].'\',\''.$ip.'\', NOW())';
-            $result = mysqli_query($db, $sql_file);
+                $result = mysqli_query($db, $sql_file);
             }
         }
         echo "<a href='./'>작성 완료</a> ";
