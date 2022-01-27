@@ -45,9 +45,21 @@
             if (true === move_uploaded_file($tmp_name,'./'.$save.'/'.$rand_name)) {
                 $insert[] = array('rand' => $rand_name, 'sysn' => $name, 'tmp' => $tmp_name, 'save' => $save, 'extension' => $extension);
             }
+        } else { 
+            if(isset($name) && strlen($name) > 0 ){
+                $file_false[] = array($name); 
+            }
         }
 
     } // end file array
+
+    // 확장자, 크기 오류 확인
+    if(isset($file_false)){
+        foreach ($file_false as $values) {
+             echo $values[0].' 업로드 실패 : 확장자 및 용량 확인하세요. ';
+             echo'<button onclick="history.back()">이전</button><br>';
+         }
+    }
 
     // board content insert
     $sql ='INSERT INTO board (`title`, `writer`, `content`, `upload_time`) VALUE (\''.$title.'\',\''.$writer.'\', \''.$content.'\', NOW())';
@@ -55,7 +67,7 @@
     if (mysqli_query($db, $sql)) {
         $last_idx = mysqli_insert_id($db);
         // if(count($insert)> 0){
-        if(isset($insert)){             // $insert 유무 
+        if(isset($insert)){
             // board_file insert
             $ip         = $_SERVER["REMOTE_ADDR"];
             foreach ($insert as $values) {
@@ -63,9 +75,10 @@
                 $sql_file = 'INSERT INTO board_file (`board_idx`, `file_name`, `rand_name`, `tmp_name`, `save`, `type`, `ip_address`, `upload_time`) 
                     VALUES (\''.$last_idx.'\', \''.$values['sysn'].'\', \''.$values['rand'].'\', \''.$values['tmp'].'\', \'./'.$values['save'].'\',\''.$values['extension'].'\',\''.$ip.'\', NOW())';
                 $result = mysqli_query($db, $sql_file);
+                echo $values['sysn'].' 업로드 완료 </br>';
             }
         }
-        echo "<a href='./'>작성 완료</a> ";
     }
+    echo "<a href='./'>리스트</a> ";
 
 ?>
