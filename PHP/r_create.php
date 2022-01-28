@@ -18,4 +18,7 @@
         <textarea name="reply" style="width:200px;height:20px;"></textarea>
         <input type="submit" value="작성">
     </form>
-<?php }?>
+<?php } else { 
+        echo '<script>alert(\'로그인 후 사용 가능합니다\');history.back();</script>';
+    }
+?>
