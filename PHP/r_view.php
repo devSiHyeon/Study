@@ -27,13 +27,13 @@
     </tr>
 </table>
 
-<input type="button" onclick="history.back()" value="이전">
+<input type="button" onclick="location.href='./board_list_3.php'" value="목록">
 <a href="./b_modify.php?idx=<?=$idx?>">수정</a>
 
 
 <h3>▶ 댓글</h3>
     <?php if($_SESSION['user_id']){?>
-    <form name='reply' action='reply.php' method='POST'>
+    <form name='reply' action='r_view_reply.php' method='POST'>
         <input type="hidden" name = "board_idx" value="<?=$idx?>">
         <label name="user_id"><?=$_SESSION['user_id'];?></label>
         <textarea name="reply" style="width:200px;height:20px;"></textarea>
@@ -44,37 +44,51 @@
     <ul>
     <?php
         $NO     = 1;
+        $reply_NO = 1;
         
         // 최상위 댓글
-        $sql    = "SELECT idx,detail_idx,`user_id`, content FROM reply WHERE reply_no = '0' AND detail_idx = '$idx'";
+        $sql    = "SELECT idx,detail_idx,`user_id`, content FROM reply WHERE reply_no = '0' AND detail_idx = '$idx' ORDER BY idx DESC";
         $result = mysqli_query($db, $sql);
-        $replyArr = array();
         
         while ($row = mysqli_fetch_assoc($result)){
     ?>
-            <li>
-                <?=$NO++;?> ||
+            <li style="margin-top:10px;">
+                <?=$NO++;?>.
                 <?=$row['user_id'];?> ||
                 <?=$row['content'];?> || 
                 <a href="./r_create.php?idx=<?=$row['idx'];?> ">댓글</a>
                 <a href="./r_update.php?idx=<?=$row['idx'];?>">수정</a>
                 <a href="./r_delete.php?idx=<?=$row['idx'];?>">삭제</a>
             </li>
-        <?php 
+    <?php 
         // 대댓글 
             $sql    = 'SELECT * FROM reply WHERE reply_idx = \''.$row['idx'].'\'';
             $result2 = mysqli_query($db, $sql);
             while ($row = mysqli_fetch_assoc($result2)){
-                $replyArr_2[]= $row;
     ?>
-         <li>
-            <label style="margin-left:20px;"></label> → <?=$NO++;?> ||
+         <li style="font-size:13px;margin-top:10px;">
+            <label style="margin-left:20px;"></label> ▶ 
             <?=$row['user_id'];?> ||
             <?=$row['content'];?> || 
+            <a href="./r_create.php?idx=<?=$row['idx'];?> ">댓글</a>
             <a href="./r_update.php?idx=<?=$row['idx'];?>">수정</a>
             <a href="./r_delete.php?idx=<?=$row['idx'];?> ">삭제</a>
         </li>
     <?php
+            // 대대댓글 
+                $sql    = 'SELECT * FROM reply WHERE reply_idx = \''.$row['idx'].'\'';
+                $result3 = mysqli_query($db, $sql);
+                while ($row_2 = mysqli_fetch_assoc($result3)){
+    ?>
+                <li style="font-size:13px;margin-top:10px;">
+                <label style="margin-left:40px;"></label> → 
+                <?=$row_2['user_id'];?> ||
+                <?=$row_2['content'];?> || 
+                <a href="./r_update.php?idx=<?=$row_2['idx'];?>">수정</a>
+                <a href="./r_delete.php?idx=<?=$row_2['idx'];?> ">삭제</a>
+                </li>
+    <?php
+                }   
             }
         }
 ?>
