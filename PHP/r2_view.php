@@ -27,7 +27,7 @@
     </tr>
 </table>
 
-<input type="button" onclick="history.back()" value="이전">
+<input type="button" onclick="location.href='./board_list_3.php'" value="목록">
 <a href="./b_modify.php?idx=<?=$idx?>">수정</a>
 
 
@@ -46,8 +46,8 @@
         $NO     = 1;
         $reply_NO = 1;
         
-        // 최상위 댓글
-        echo $sql    = "SELECT idx,detail_idx,`user_id`, reply_no, content FROM reply_2 WHERE detail_idx = '$idx' ORDER BY reply_rank ASC";
+        // 댓글
+        $sql    = "SELECT idx,detail_idx,`user_id`, reply_no, content FROM reply_2 WHERE detail_idx = '$idx' ORDER BY reply_rank ASC";
         $result = mysqli_query($db, $sql);
         
         while ($row = mysqli_fetch_assoc($result)){
