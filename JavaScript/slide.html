@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <link rel='stylesheet' type='text/css' href="/css/common.css">
+</head>
+<body>
+    3. 슬라이드 <br>
+    <label>: 버튼 클릭시 화면에 숫자 1, 2는 그대로 표시 </label><br>
+    <label>: div 위치는 변경 (class명으로 표기 - one, two)</label><br><br>
+
+    3-1. 배열 <br>
+    <div id="slide_1">
+        <div class="child one">첫번째</div>
+        <div class="child two">두번째</div>
+    </div>
+    <button id="btn_1">적용</button> <br> <br>
+
+    3-2. toggle <br>
+    <div id="slide_2">
+        <div class="child_2 one">첫번째</div>
+        <div class="child_2 two">두번째</div>
+    </div>
+    <button id="btn_2">적용</button> <br> <br>
+    
+    <script>
+        // 슬라이드        
+            // 방법 1
+            document.getElementById('btn_1').addEventListener('click', btn_slide);
+            var parent  = document.getElementById('slide_1');
+            var child   = document.getElementsByClassName('child');
+
+            function btn_slide() {
+                parent.prepend(child[1]);
+                //parent.append(child[0]);
+                child[0].innerHTML = '1';
+                child[1].innerHTML = '2';
+
+                console.log(child[0], child[1]);
+            }
+
+            // 방법 2
+            
+    </script>
+</body>
+</html>
