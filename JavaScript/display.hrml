@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .menu, .sub {
+            border:1px solid gray;
+            width:70px;
+            height:70px;
+            text-align: center;
+            line-height: 70px;
+            margin-bottom:-1px;
+        }
+        .sub{display:none;}
+        .sub_b{display:block;}
+    </style>
+</head>
+
+<body>
+    조건1 : 서브메뉴는 기본적으로 숨기기 <br><br>
+    조건2 : M 버튼 클릭시 S 화면 보이기 <br><br>
+    <div id='drop'>
+        <div class="menu">M1</div>
+        <div class="menu">M2</div>
+        <div class="menu">M3</div> 
+        <div class="sub">S1</div>
+        <div class="sub">S2</div>
+        <div class="sub">S3</div>
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        var menu = document.getElementsByClassName('menu'),
+            sub  = document.getElementsByClassName('sub');
+            
+            var dropSub = function(idx) {
+                Array.from(sub).forEach(function(el, key){
+                    if (key == idx && el.style.display=='none') el.style.display = 'block';
+                    else el.style.display ='none';
+                });
+            }
+
+            Array.from(menu).forEach(function(el, key){       
+                 
+                el.addEventListener('click', function(e, key){
+                    dropSub(Array.from(menu).indexOf(this))
+                })
+            })
+
+    });
+/*
+    Array.from(menu)
+        : menu에 담겨 있는 값들을 배열로 변경
+        <div class="menu">M1</div>
+        <div class="menu">M2</div>
+    
+    forEach(function(el, key)
+        el - 첫 번째에는 값 : <div class="menu">M1</div>
+        key - 두 번째에는 몇 번째 배열인가? : 숫자
+    
+    indexOf 
+        : (배열.indexOf(값 or this))
+        : 문자 위치 찾기        
+*/
+</script>
+</body>
+</html>
