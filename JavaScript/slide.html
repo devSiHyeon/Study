@@ -38,6 +38,22 @@
             }
 
             // 방법 2
+            var parent_2 = document.getElementById('slide_2');
+                //parent_2.innerHTML = '<div class=\'child_2 one_2 slide\'></div><div class=\'child_2 two_2\'></div>';
+                parent_2.innerHTML = '<div class=\'child_2 one_2\'>1</div>';
+                parent_2.innerHTML += '<div class=\'child_2 two_2\'>2</div>';
+
+                var child_2  = document.getElementsByClassName('child_2');
+
+                btn_2.onclick = function () {
+                    parent_2.prepend(child_2[1]);
+                }
+            });
+    /*
+        append : 지정하는 값을 현재 위치에서 지우고 맨 마지막에 생성
+        prepend : 지정하는 값을 현재 위치에서 지우고 맨 앞에 생성
+
+    */
             
     </script>
 </body>
