@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<head>
+    <link rel='stylesheet' type='text/css' href="./css/common.css">
+</head>
+<body>
+    ▶ 버튼 슬라이드<br>
+    1. 버튼 클릭시 화면에 div 위치 변경 (1번이 제일 끝으로)<br><br>
+    2. 첫 번째 div만 block, 나머지는 hidden<br><br>
+    
+    <div id="slide">
+        <div class="child">1</div>
+        <div class="child">2</div>
+        <div class="child">3</div> 
+    </div>
+    <button id="btn_1" >버튼</button> <br> <br>
+
+    <script>
+      document.addEventListener('DOMContentLoaded',function(){
+
+        var btn   = document.getElementById('btn_1'),
+            slide = document.getElementById('slide'),
+            child = document.getElementsByClassName('child');
+            for(i = 1; i < child.length; i++){
+              child[i].style.display='none';
+            }
+           
+          btn.onclick = function(){
+            //  slide.append(child[0]);
+            //  child[0].style.display="block";
+            //  child[1].style.display="none";
+            //  child[2].style.display="none";
+
+          // 슬라이드 갯수의 변화가 있어도 적용
+          for(i = 0; i < child.length; i++){
+            child[i].style.display='none';
+          }
+          
+            slide.append(child[0]);
+            child[0].style.display='block';
+          }
+      });
+    </script>
+</body>
+</html>
