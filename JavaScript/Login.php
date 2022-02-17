@@ -1,6 +1,7 @@
 <?php
     error_reporting( E_ALL );
     ini_set( "display_errors", 1 );
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +11,10 @@
     <script type="text/javascript" src="./Logout.js"></script>
 </head>
 <body>
-    <?php session_start();
-        //$_SESSION['user_id'] = '';
-        if (strlen($_SESSION['user_id']) > 0) {
+    <?php 
+    
+        if (isset($_SESSION['user_id']) && strlen($_SESSION['user_id'] == '0')) echo $_SESSION['user_id'] = '';
+        if (isset($_SESSION['user_id']) && strlen($_SESSION['user_id']) > 0) {
     ?>
         <?= $_SESSION['user_id']?> 님 환영합니다.
         <form name="logout_form" action="./Logout.php" method="POST">
