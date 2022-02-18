@@ -1,26 +1,56 @@
 <!DOCTYPE html>
 <head>
     <link rel='stylesheet' type='text/css' href="/css/common.css">
+    <style>
+        /* 방법 1 */
+        .div1, .div2 {
+            color:blue;
+            font-weight:700;
+        }
+        .active { 
+            color:red;
+        }
+        /* 힌트 */
+        .red-color .red{color:#FF0000}
+        .blue .red{color:#0000FF}
+        .blue-color .blue{color:#0000FF}
+        .red .blue{color:#FF0000}
+        .color{font-weight:700}
+    </style>
 </head>
 <body>
     2. 색상변경 <br>
+    <!-- 방법 1 -->
     <label>: 버튼 클릭시 toggle 사용하여 숫자 1, 2 색상 변경 </label><br><br>
     <div id="div1" class="div1 active">1</div>
     <div id="div2" class="div2">2</div>
     <button id="btn_1">적용</button><br><br>
-    
-    <script>
+
+    <!-- 힌트 -->
+    <div id="item1" class="color red-color">
+        <div  class="item red">1</div>
+    </div>
+    <div id="item2" class="color blue-color">
+        <div class="item blue">2</div>
+    </div>
+
+    <button id="btn" type="button">교환</button>
+
+    <script> 
         // 토글 (버튼 색상 변경)
-            document.getElementById('btn_1').addEventListener('click', color);
-            var div1    = document.getElementById('div1');
-            var div2    = document.getElementById('div2');
-            //var btn     = 0;
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn     = document.getElementById('btn_1'),
+                div1    = document.getElementById('div1'),
+                div2    = document.getElementById('div2');
             
-            function color(){
+            // 방법 2
+            btn.onclick = function (){
                 div1.classList.toggle('active');
                 div2.classList.toggle('active');
             }   
-            
+
+        });
+        // 방법 1
             // function color(){
             //     if(btn == 0){
             //         div1.style.color="red";
@@ -32,8 +62,36 @@
             //         btn = 0;
             //     }
             //     console.log(btn);
-            // }   
-        
+            // }  
+            
+        // 방법 3
+            // document.addEventListener('DOMContentLoaded', function() {
+            //     var btn = document.getElementById('btn_1'),
+            //         item1 = document.getElementById('div1'),
+            //         item2 = document.getElementById('div2');
+
+            //     btn.onclick = function(event) {
+            //        item1.classList.toggle('blue');      // blue라는 class 이름
+            //        item2.classList.toggle('red');       // red class 이름
+            //     }
+            // });
+            
+        // 힌트
+        document.addEventListener('DOMContentLoaded', function() {
+                var btn = document.getElementById('btn'),
+                    item1 = document.getElementById('item1'),
+                    item2 = document.getElementById('item2');
+
+                btn.onclick = function(event) {
+                   item1.classList.toggle('blue');
+                   item2.classList.toggle('red');
+                }
+            });
+    /*
+        toggle 
+            : toggle 사용할 태크(Id or Class).classList.toggle('class Name');
+            : 스위치 기능 (클래스 명 생성, 삭제 반복)           
+    */
     </script>
 </body>
 </html>
