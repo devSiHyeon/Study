@@ -19,21 +19,24 @@ $(document).ready(function(){
             }    
 
         $.ajax({
-            url:"./LoginProcess.php",
+            url:"./process/login.php",
             type:"POST",
             dateType:'json',
             data:{'id':form.user_id.value,'pw':form.user_pw.value},
             success:function(res){
 
-                //var data = JSON.parse(res);
-                var data    = $.parseJSON(res);
+                //var data = $.parseJSON(res);       // 낮은 버전에서 사용 현재는 많이 사용하지 않음
+                var data    = JSON.parse(res);
 
-                if (data.success == true) {
+                if (data.success == 0) {
+                    alert('서비스 오류입니다.\관리자에게 문의하세요.');
+                    
+                } else if (data.success == 1) {
                     alert('로그인 성공');
-                    window.location.href='./Login.php';
+                    window.location.href='./login.php';
                 } else {
                     alert('정보 불일치');
-                }
+                }        
                 //if (data.success == false) alert('정보 불일치');
                 
             }
