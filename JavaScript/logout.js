@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('[name=logout_btn]').click(function(){    
         
         $.ajax({
-            url:"./Logout.php",
+            url:"./logout.php",
             type:"POST",
             dateType:'json',
             data:'',
@@ -12,7 +12,7 @@ $(document).ready(function(){
                 var data = $.parseJSON(res);
                 if (data.success == true) {
                     alert('로그아웃 되었습니다.');
-                    window.location.href='./Login.php';
+                    window.location.href='./login.php';
                 }                
             }
         })
