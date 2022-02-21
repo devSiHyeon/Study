@@ -1,6 +1,9 @@
 // fetch
 $(document).ready(function(){
     $('[name=login_btn]').click(function(){
+        var form    = document.login_form,
+            user_id = form.user_id.value,
+            user_pw = form.user_pw.value;
         
     // 아이디 체크
         if(user_id.length < 4){
@@ -15,8 +18,7 @@ $(document).ready(function(){
         }    
         
     // fetch (POST)
-        var form = document.login_form,
-            formData = new FormData(form);
+        var formData = new FormData(form);
 
         fetch('./process/login.php',{
             method:'POST',
