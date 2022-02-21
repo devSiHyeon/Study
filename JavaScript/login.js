@@ -1,28 +1,53 @@
-// ajax
+// fetch
 $(document).ready(function(){
     $('[name=login_btn]').click(function(){
+        
+    // 아이디 체크
+        if(user_id.length < 4){
+            alert("id 4자 이상 작성하세요");
+            return false;
+        }
 
+    // 비밀번호 체크
+        if (user_pw.length < 8){
+            alert("pw 8자 이상 작성하세요");
+            return false;
+        }    
+        
+    // fetch (POST)
         var form = document.login_form,
-            user_id = form.user_id.value,
-            user_pw = form.user_pw.value;
+            formData = new FormData(form);
 
-            // 아이디 체크
-            if(user_id.length < 4){
-                 alert("id 4자 이상 작성하세요");
-                 return false;
-             }
-
-             // 비밀번호 체크
-             if (user_pw.length < 8){
-                 alert("pw 8자 이상 작성하세요");
-                 return false;
-             }    
-
+        fetch('./process/login.php',{
+            method:'POST',
+            headers : new Headers(),
+            body:formData
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            if (data.result == 0){
+                alert('관리자에게 문의하세요');
+            } else if ( data.result == 'id') {
+                alert ('id 4자 이상 작성하세요');
+                //console.log(data)
+            } else if ( data.result == 'pw') {
+                alert ('pw 8자 이상 작성하세요');
+            } else if (data.result == 1) {
+                alert('로그인 성공');
+                window.location.href='./login.php';
+            } else {
+                alert ('회원정보를 찾을 수 없습니다.');
+            }
+        })
+        
+   // ajax (POST)
+        var form = document.login_form;
         $.ajax({
             url:"./process/login.php",
             type:"POST",
             dateType:'json',
-            data:{'id':form.user_id.value,'pw':form.user_pw.value},
+            data:{'user_id':form.user_id.value,'user_pw':form.user_pw.value},
             success:function(res){
 
                 //var data    = $.parseJSON(res);
