@@ -27,7 +27,7 @@
     <form name="login_form" action="./login.php" method="POST">
         id <input type="text" name="user_id" value="">
         pw <input type="password" name="user_pw" value="">
-        <input type="button" name='login_btn' value="Login">
+        <button type="button" name='login_btn'>Login</button>
     </form>
     
     <?php            
