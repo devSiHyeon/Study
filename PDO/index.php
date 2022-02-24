@@ -1,12 +1,10 @@
-<?php   
-    require_once "./header.php";
+<?php  require_once ($_SERVER['DOCUMENT_ROOT'].'/pdo/header.php');
     if( isset($_SESSION['user_id']) && strlen($_SESSION['user_id']) > 0){
-        echo $_SESSION['user_id']."님 환영합니다";
 ?>
     <ul>
-        <li><a href="./process/logout.php">로그아웃</a></li>
-        <li><a href="./list1.php">회원목록1 </a> : 함수 사용 & 수정 & 삭제 & 댓글</li>
-        <li><a href="./list2.php">회원목록2 </a> : 관리자, 회원 구분</li>
+        <li></li>
+        <li><a href="./member.php">회원목록 (관리자 member) </a> : 함수 사용 & 수정 & 삭제 & 댓글</li>
+        <li><a href="./privacy.php">회원수정 (개인) </a> : 관리자, 회원 구분</li>
         <li><a href="./boardlist.php">게시판 </a></li> 
     </ul>
 <?php    } else { ?>
@@ -27,5 +25,5 @@
         <input type="submit" value="로그인">
     </form>
 <?php } 
-    require_once "./footer.php";
+    require_once ($_SERVER['DOCUMENT_ROOT'].'/pdo/footer.php'); 
 ?>
