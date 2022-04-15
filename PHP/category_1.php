@@ -1,3 +1,10 @@
+<?php
+// 검색 카테고리
+$sc_gc_id1      = isset($_GET['sc_gc_id1']) ? $_GET['sc_gc_id1'] : "";		// 카테고리1
+$sc_gc_id2      = isset($_GET['sc_gc_id2']) ? $_GET['sc_gc_id2'] : "";		// 카테고리2
+$sc_gc_id3      = isset($_GET['sc_gc_id3']) ? $_GET['sc_gc_id3'] : "";		// 카테고리3
+$sc_gc_id4      = isset($_GET['sc_gc_id4']) ? $_GET['sc_gc_id4'] : "";		// 카테고리4
+
 // 리스트
 $sql = "SELECT *
        FROM table  WHERE 조건
