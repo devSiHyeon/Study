@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?php if (isset($AGENT['alias']) && $AGENT['alias'] == 'IE') { ?>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6%2Cfetch%2CElement.prototype.prepend%2CElement.prototype.append%2"></script>
+    <?php } ?> 
+    <script src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>   
+</head>    
+<body>
+
+<form name="board_write" id='board_write' method="POST">
+    아이디 : <?= $id?><br>
+    제목 : <input type="text" id='title' name="title"><br>
+    문의 내용 : <textarea id='content' name="content"></textarea><br>
+    첨부파일 <div id="file-list">
+                <input type='file' class='file' name="file[]">
+            </div>
+</form>
+<a href="/user/board/list.html">목록</a>
+<button type="submit" id='write' name="write">작성완료</button>
+
+<script>   
+  
+/******* Array.from(file).forEach 사용 *******/
+        var drawFile = function()
+    {
+         //ui = '<input class="file1" type="file" name="file[]" value="">',
+         var input = document.createElement('input'),
+            parent = document.getElementById('file-list'),
+            fragment = document.createDocumentFragment();
+
+        input.setAttribute('name','file[]');
+        input.setAttribute('class','file');
+        input.setAttribute('type','file');
+        input.addEventListener('change', drawFile, false);
+        parent.append(input);
+        //parent.innerHTML = ui;
+
+    }
+
+    var file = document.getElementsByClassName('file'),
+        file_list = document.getElementById('file-list');
+
+        // var input = document.createElement('input');
+     
+        
+    Array.from(file).forEach(function(el) {
+        el.addEventListener('change', function(){
+            
+            drawFile();
+        })
+
+    })
+  
+    
+/******* fragment 사용 *******/
+    var drawFile = function()
+    {
+         //ui = '<input class="file1" type="file" name="file[]" value="">',
+         var input = document.createElement('input'),
+            parent = document.getElementById('file-list'),
+            fragment = document.createDocumentFragment();
+
+        input.setAttribute('name','file[]');
+        input.setAttribute('class','file');
+        input.setAttribute('type','file');
+        fragment.appendChild(input);          // append는 IE에서 인식하지 못함 
+        parent.appendChild(fragment);
+
+    }
+
+    document.addEventListener('change', function(el){
+
+        console.log('a')
+        if (el.target.classList.contains('file') ) drawFile();      
+
+    })
+    
+</script>
+</body>
+</html>
