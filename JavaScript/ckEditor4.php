@@ -40,6 +40,17 @@ ckEditor4
 <php>
 
   // 파일 저장 이후 값 넘길 때
-  echo ('{"filename" : "'.$insert_f[0]['rand'].'", "uploaded" : 1, "url":"'.$path.'"}');
+      // 방법1 
+          echo ('{"filename" : "'.$insert_f[0]['rand'].'", "uploaded" : 1, "url":"'.$path.'"}');
+  
+      // 방법2
+          $ckEditor = array(
+                'filename' =>  $insert_f[0]['rand'], 
+                'uploaded' =>  1, 
+                'url'=> $path,
+                'idx'=> $result_f
+              );
+          exit (json_encode($ckEditor));
+  
   
 </php>
