@@ -8,7 +8,7 @@ ckEditor4
   <body>
     문의 내용 : <textarea id='content' name="content" rows="10" cols="80"></textarea><br>
 
-    <scirpt>
+    <script>
       CKEDITOR.replace('content',{
           filebrowserUploadUrl:'/vital/assoc/board/file.php',     // 이미지 업로드 기능 추가 : 파일 저장 경로
           height: 200,
