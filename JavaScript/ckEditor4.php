@@ -33,7 +33,7 @@ ckEditor4
       contents = CKEDITOR.instances.content.getData();
       ㅡㅡㅡㅡ                       ㅡㅡㅡㅡ
         변수                       textarea ID
-    </script>
+      </script>
   </body>
 </html>
 
