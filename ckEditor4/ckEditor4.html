@@ -20,10 +20,11 @@ ckEditor4
       CKEDITOR.on('dialogDefinition', function(e){
           var dialogName = e.data.name;
           var dialogDefinition = e.data.definition;
+        
           switch(dialogName){
               case 'image':
                   // dialogDefinition.removeContents('info');      // 이미지 정보
-                  dialogDefinition.removeContents('Link');          // 링크
+                  dialogDefinition.removeContents('Link');         // 링크
                   dialogDefinition.removeContents('inadvanced');
                   break; 
           }
@@ -32,6 +33,9 @@ ckEditor4
       contents = CKEDITOR.instances.content.getData();
       ㅡㅡㅡㅡ                       ㅡㅡㅡㅡ
         변수                       textarea ID
+        
+        formdata.append('text',test);                               // form으로 data 넘길 때 추가 (IE사용가능)
+        formdata.set('text',test);                                  // form으로 data 넘길 때 추가 (IE사용불가능)
       </script>
   </body>
 </html>
