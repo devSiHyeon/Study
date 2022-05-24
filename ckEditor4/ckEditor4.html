@@ -10,10 +10,19 @@ ckEditor4
     문의 내용 : <textarea id='content' name="content" rows="10" cols="80"></textarea>
     
     <script>
+     
       CKEDITOR.replace('content',{
           filebrowserUploadUrl:'/vital/assoc/board/file.php',     // 이미지 업로드 기능 추가 : 파일 저장 경로
           height: 200,
-          width:800
+          width:800,
+          toolbar:[                                               // 참고 ( https://ckeditor.com/docs/ckeditor4/latest/features/toolbar.html )
+                    ['Bold','Italic','Strike'],['|'],
+                    ['NumberedList','BulletedList'],['|'],
+                    ['Outdent','Indent'],['|'],
+                    ['Blockquote'],['|'],
+                    ['Styles','Format'],['|'],
+                    ['Image'],['About']
+                ],
       });
       
       // CKeditor (이미지 속성 눌렀을 때 기능)
